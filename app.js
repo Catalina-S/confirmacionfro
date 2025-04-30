@@ -1,56 +1,25 @@
-document.getElementById('MedicamentosForm').addEventListener('submit', function(event) {
-  event.preventDefault();
+function buscarMedicamento() {
+  const medId = document.getElementById('medId').value.trim();
+  const resultado = document.getElementById('resultado');
 
-  // Obtener los valores del formulario
-  const name = document.getElementById('name').value;
-  const familyName = document.getElementById('familyName').value;
-  const identifierSystem = document.getElementById('identifierSystem').value;
-  const identifierValue = document.getElementById('identifierValue').value;
-  const medicationCode = document.getElementById('medicationCode').value;
-  const medicationDisplay = document.getElementById('medicationDisplay').value;
-  const dosage = document.getElementById('dosage').value;
-  const frequency = document.getElementById('frequency').value;
-  const duration = document.getElementById('duration').value;
+  if (!medId) {
+    resultado.innerHTML = "<p style='color:red;'>Por favor ingresa un ID válido.</p>";
+    return;
+  }
 
-  // Crear el objeto MedicationRequest
-  const medicationRequest = {
-    resourceType: "MedicationRequest",
-    status: "active",
-    intent: "order",
-    medicationCodeableConcept: {
-      coding: [{
-        system: "http://www.nlm.nih.gov/research/umls/rxnorm",
-        code: medicationCode,
-        display: medicationDisplay
-      }]
-    },
-    subject: {
-      identifier: {
-        system: identifierSystem,
-        value: identifierValue
-      },
-      display: `${name} ${familyName}`
-    },
-    dosageInstruction: [{
-      text: `Tomar ${dosage} cada ${frequency} horas durante ${duration} días`
-    }]
-  };
-
-  // Enviar la solicitud al backend
-  fetch('https://confirmacionback.onrender.com', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(medicationRequest)
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      alert('Receta creada exitosamente');
+  fetch(`https://TU-BACKEND.onrender.com/api/medication/${medId}`)
+    .then(res => {
+      if (!res.ok) throw new Error("No encontrado");
+      return res.json();
     })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Error al crear la receta');
+    .then(data => {
+      resultado.innerHTML = `
+        <h3>Información del Medicamento</h3>
+        <pre>${JSON.stringify(data, null, 2)}</pre>
+      `;
+    })
+    .catch(err => {
+      resultado.innerHTML = `<p style="color:red;">${err.message}</p>`;
     });
-});
+}
+

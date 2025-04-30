@@ -1,46 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Medicamento</title>
+  <meta charset="UTF-8">
+  <title>Buscar Medicamento</title>
 </head>
 <body>
-    <h1>Formulario de Medicamento</h1>
-    <form id="MedicamentosForm">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" required><br><br>
+  <h1>Consulta de Medicamentos por ID</h1>
 
-        <label for="familyName">Apellido:</label>
-        <input type="text" id="familyName" required><br><br>
+  <input type="text" id="medId" placeholder="Ingresa ID de MongoDB">
+  <button onclick="buscarMedicamento()">Buscar</button>
 
-        <label for="identifierSystem">Tipo de documento:</label>
-        <select id="identifierSystem" required>
-            <option value="http://cedula">Cédula de ciudadanía</option>
-            <option value="http://pasaporte">Pasaporte</option>
-        </select><br><br>
+  <div id="resultado" style="margin-top: 20px;"></div>
 
-        <label for="identifierValue">Número de documento:</label>
-        <input type="text" id="identifierValue" required><br><br>
-
-        <label for="medicationCode">Código del medicamento:</label>
-        <input type="text" id="medicationCode" required><br><br>
-
-        <label for="medicationDisplay">Nombre del medicamento:</label>
-        <input type="text" id="medicationDisplay" required><br><br>
-
-        <label for="dosage">Dosis:</label>
-        <input type="text" id="dosage" required><br><br>
-
-        <label for="frequency">Frecuencia:</label>
-        <input type="text" id="frequency" required><br><br>
-
-        <label for="duration">Duración:</label>
-        <input type="text" id="duration" required><br><br>
-
-        <button type="submit">Enviar Solicitud</button>
-    </form>
-
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
