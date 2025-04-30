@@ -37,7 +37,7 @@ document.getElementById('MedicamentosForm').addEventListener('submit', function(
   };
 
   // Enviar la solicitud al backend
-  fetch('https://confirmacionback.onrender.com/', {
+  fetch('https://confirmacionback.onrender.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
