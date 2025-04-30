@@ -7,19 +7,21 @@ function buscarMedicamento() {
     return;
   }
 
-  fetch('https://confirmacionback.onrender.com')
-    .then(res => {
-      if (!res.ok) throw new Error("No encontrado");
-      return res.json();
-    })
+  fetch('https://confirmacionback.onrender.com', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(medicationRequest)
+  })
+    .then(response => response.json())
     .then(data => {
-      resultado.innerHTML = `
-        <h3>Información del Medicamento</h3>
-        <pre>${JSON.stringify(data, null, 2)}</pre>
-      `;
+      console.log('Success:', data);
+      alert('Receta creada exitosamente');
     })
-    .catch(err => {
-      resultado.innerHTML = `<p style="color:red;">${err.message}</p>`;
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error al crear la receta');
     });
 }
 
