@@ -7,25 +7,25 @@ function buscarMedicamento() {
     return;
   }
 
-  // Crear el objeto que se enviará al backend
-  const medicationRequest = {
-    id: medId
-  };
-
-  fetch('https://confirmacionback.onrender.com/medication-request', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(medicationRequest)
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      alert('Receta creada exitosamente');
+  // Aquí hacemos un GET para obtener la receta desde el backend
+  fetch(`https://confirmacionback.onrender.com/medication-request/${medId}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No se encontró la receta.");
+      }
+      return response.json();
+    })
+    .then(medData => {
+      resultado.innerHTML = `
+        <h3>Receta médica</h3>
+        <p><strong>ID:</strong> ${medData._id}</p>
+        <p><strong>Medicamento:</strong> ${medData.medication || 'No disponible'}</p>
+        <p><strong>Paciente:</strong> ${medData.subject?.display || 'No especificado'}</p>
+        <p><strong>Estado:</strong> ${medData.status || 'Desconocido'}</p>
+      `;
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error al crear la receta');
+      resultado.innerHTML = "<p style='color:red;'>Error al buscar la receta.</p>";
     });
 }
