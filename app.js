@@ -7,7 +7,7 @@ function buscarMedicamento() {
     return;
   }
 
-  fetch(`https://TU-BACKEND.onrender.com/api/medication/${medId}`)
+  fetch(`https://confirmacionback.onrender.com`)
     .then(res => {
       if (!res.ok) throw new Error("No encontrado");
       return res.json();
