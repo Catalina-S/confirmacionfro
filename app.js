@@ -37,7 +37,7 @@ document.getElementById('MedicamentosForm').addEventListener('submit', function(
   };
 
   // Enviar la solicitud al backend
-  fetch('https://meds-backend-fjhd.onrender.com/medication-request', {
+  fetch('https://confirmacionback.onrender.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
