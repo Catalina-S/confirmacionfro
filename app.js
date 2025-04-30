@@ -7,6 +7,11 @@ function buscarMedicamento() {
     return;
   }
 
+  // Crear el objeto que se enviará al backend
+  const medicationRequest = {
+    id: medId
+  };
+
   fetch('https://confirmacionback.onrender.com', {
     method: 'POST',
     headers: {
@@ -24,4 +29,3 @@ function buscarMedicamento() {
       alert('Error al crear la receta');
     });
 }
-
