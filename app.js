@@ -12,7 +12,7 @@ function buscarMedicamento() {
     id: medId
   };
 
-  fetch('https://confirmacionback.onrender.com', {
+  fetch('https://confirmacionback.onrender.com/medication-request', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
