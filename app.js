@@ -19,7 +19,6 @@ function buscarMedicamento() {
       resultado.innerHTML = `
         <h3>Receta médica</h3>
         <p><strong>ID:</strong> ${medData._id}</p>
-        <p><strong>Medicamento:</strong> ${medData.medication || 'No disponible'}</p>
         <p><strong>Paciente:</strong> ${medData.subject?.display || 'No especificado'}</p>
         <p><strong>Estado:</strong> ${medData.status || 'Desconocido'}</p>
       `;
